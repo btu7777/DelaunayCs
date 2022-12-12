@@ -37,20 +37,20 @@ namespace DelaunayTriangle.Core.Models
         {
             throw new NotImplementedException();
         }
-        int query_knn(
-          double[] dd,
-          int* ii,
-          double[] xx,
-          int n,
-          int* k,
-          int nk,
-          int kmax,
-          double eps,
-          double p,
-          double distance_upper_bound)
-        {
-            throw new NotImplementedException();
-        }
+        //int query_knn(
+        //  double[] dd,
+        //  int* ii,
+        //  double[] xx,
+        //  int n,
+        //  int* k,
+        //  int nk,
+        //  int kmax,
+        //  double eps,
+        //  double p,
+        //  double distance_upper_bound)
+        //{
+        //    throw new NotImplementedException();
+        //}
     };
 }
 

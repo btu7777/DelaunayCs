@@ -1,4 +1,5 @@
-﻿using Prism.Commands;
+﻿using Microsoft.Win32;
+using Prism.Commands;
 using Prism.Mvvm;
 using PropertyChanged;
 using System;
@@ -7,47 +8,102 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
+using Utils;
 using System.Threading.Tasks;
 
 namespace Contour.TestUI.ViewModels
 {
     internal class MainWindowViewModel : BindableBase
     {
-
+        static string tempFile = Path.Combine(Path.GetTempPath(), "triData.csv");
         public string Info { get; set; }
         public string FilePath { get; set; }
         public string PythonExePath { get; set; }
+        public string PythonFilePath { get; set; }
+        public double Heigtht { get; set; } = 50;
         public DelegateCommand GenTrisCmd { get; set; }
         public DelegateCommand GenContourCmd { get; set; }
         public DelegateCommand InitCmd { get; set; }
+        public DelegateCommand ClearCmd { get; set; }
+        public DelegateCommand LoadDataCmd { get; set; }
+        public DelegateCommand SetPythonExePathCmd { get; set; }
+        public DelegateCommand SetPythonFilePathCmd { get; set; }
         public MainWindowViewModel()
         {
+            GenContourCmd = new DelegateCommand(GenContour);
             GenTrisCmd = new DelegateCommand(GenTris);
             InitCmd = new DelegateCommand(Init);
+            ClearCmd = new DelegateCommand(Clear);
+            LoadDataCmd = new DelegateCommand(LoadData);
+            SetPythonExePathCmd = new DelegateCommand(SetPythonExePath);
+            SetPythonFilePathCmd = new DelegateCommand(SetPythonFilePath);
 
+        }
+
+        private void SetPythonFilePath()
+        {
+            new Action<string>((m) => PythonFilePath = m).MyOpenFileDialog("选择py文件", "py");
+        }
+
+        private void SetPythonExePath()
+        {
+            new Action<string>((m) => PythonExePath = m).MyOpenFileDialog("选择python.exe路径", "exe");
+        }
+
+        private void LoadData()
+        {
+            new Action<string>((m) => FilePath = m).MyOpenFileDialog("选择py文件", "csv", "txt");
+        }
+
+        private void GenContour()
+        {
+        }
+
+        private void Clear()
+        {
+            PythonFilePath = string.Empty;
+            Info = string.Empty;
+            FilePath = string.Empty;
+            PythonExePath = string.Empty;
         }
 
         private void Init()
         {
-
+            PythonFilePath = @"D:\document\GitHub\1-python\1-practice\setup.py";
+            FilePath = @"D:\document\GitHub\1-python\1-practice\cav.csv";
+            AutoSetPythonExe();
         }
-
-        string pythonDir = Environment.GetEnvironmentVariable("PYTHONPATH");
+        bool AutoSetPythonExe()
+        {
+            var paths = Environment.GetEnvironmentVariable("Path").Split(';').Where(x => x.Contains("Python"));
+            foreach (var path in paths)
+            {
+                string exeFile = Path.Combine(path, "python.exe");
+                if (File.Exists(exeFile))
+                {
+                    PythonExePath = exeFile;
+                    return true;
+                }
+            }
+            return false;
+        }
         private void GenTris()
         {
-            if (PythonExePath != null)
+            // Check PythonExePath
+            if (string.IsNullOrEmpty(PythonExePath))
             {
-                if (!string.IsNullOrEmpty(pythonDir))
-                {
-                    PythonExePath = pythonDir;
-                }
-                else return;
+                if (!AutoSetPythonExe()) return;
             }
-            if (string.IsNullOrEmpty(FilePath) || File.Exists(FilePath))
+            // Check FilePath
+            if (string.IsNullOrEmpty(FilePath) || !File.Exists(FilePath))
                 return;
-            ProcessStartInfo startInfo = new ProcessStartInfo();
-            startInfo.FileName = pythonExe;
-            startInfo.Arguments = pythonFile;
+            ProcessStartInfo startInfo = new ProcessStartInfo()
+            {
+                FileName = PythonExePath,
+                Arguments = $"{PythonFilePath} --param1=={FilePath}",
+            };
+            startInfo.FileName = PythonExePath;
+            //startInfo.Arguments = pythonFile;
             // Start the Python process
             using (Process process = Process.Start(startInfo))
             {
@@ -58,9 +114,19 @@ namespace Contour.TestUI.ViewModels
                 if (process.ExitCode != 0)
                 {
                     // The Python process exited with an error
-                    Console.WriteLine("An error occurred while running the Python file.");
+
+                }
+                else
+                {
+                    // The Python process exited normally
+                    Info = "三角形生成成功!";
+                    File.ReadAllText(tempFile);
                 }
             }
+        }
+        void ReadCsvData(string content)
+        {
+
         }
     }
 }

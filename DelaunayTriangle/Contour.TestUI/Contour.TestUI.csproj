@@ -10,14 +10,18 @@
 
 	<ItemGroup>
 		<Folder Include="Controls\Converts\" />
-		<Folder Include="Models\" />
 		<Folder Include="Images\" />
+		<Folder Include="Models\" />
 		<Folder Include="Views\" />
 	</ItemGroup>
 
 	<ItemGroup>
 	  <PackageReference Include="Prism.Core" Version="8.1.97" />
 	  <PackageReference Include="PropertyChanged.Fody" Version="4.1.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\Utils\Utils.csproj" />
 	</ItemGroup>
 	<ItemGroup>
 		<Page Update="Styles\Colors.xaml">

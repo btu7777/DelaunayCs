@@ -6,39 +6,79 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:viewmodel="clr-namespace:Contour.TestUI.ViewModels"
         Title="MainWindow"
-        Width="800"
-        Height="450"
+        Width="1080"
+        Height="760"
         mc:Ignorable="d">
     <Window.DataContext>
         <viewmodel:MainWindowViewModel />
     </Window.DataContext>
-    <Window.Resources />
+    <Window.Resources >
+        <Style TargetType="TextBox">
+            <Setter Property="MinWidth" Value="50" />
+            <Setter Property="AcceptsReturn" Value="True" />
+            <Setter Property="TextWrapping" Value="Wrap" />
+        </Style>
+        <Style TargetType="Button">
+            <Setter Property="MinWidth" Value="50"/>
+            <Setter Property="Margin" Value="5,0"/>
+        </Style>
+    </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="150" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="200"/>
+        </Grid.RowDefinitions>
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition />
                 <RowDefinition />
             </Grid.RowDefinitions>
             <StackPanel Grid.Column="0">
-                <Button>导入数据文件</Button>
-                <Button>导入数据文件</Button>
-                <Button>生成三角面</Button>
-                <Button>生成</Button>
-            </StackPanel>
-            <GroupBox Grid.Row="1" Header="信息展示">
-                <StackPanel>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock>python路径</TextBlock>
-                        <TextBox />
-                    </StackPanel>
-                    <TextBlock Text="{Binding Info}"></TextBlock>
+                <Button Command="{Binding GenTrisCmd}">生成三角面</Button>
+                <Button Command="{Binding GenContourCmd}">生成等高线</Button>
+                <Button Command="{Binding InitCmd}">重置</Button>
+                <Button Command="{Binding ClearCmd}">清理</Button>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock>等高线取值</TextBlock>
+                    <TextBox Text="{Binding Heigtht}"/>
                 </StackPanel>
-            </GroupBox>
-        </Grid>
+            </StackPanel>
 
+        </Grid>
+        <GroupBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Header="信息展示">
+            <StackPanel>
+                <StackPanel.Resources>
+                    <Style TargetType="TextBlock">
+                        <Setter Property="Width" Value="120" />
+                        <Setter Property="TextWrapping" Value="Wrap" />
+                    </Style>
+                    <Style TargetType="TextBox">
+                        <Setter Property="MinWidth" Value="120" />
+                        <Setter Property="Margin" Value="2"/>
+                        <Setter Property="TextWrapping" Value="Wrap" />
+                    </Style>
+                </StackPanel.Resources>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock >文件地址</TextBlock>
+                    <TextBox Text="{Binding FilePath}"/>
+                    <Button Command="{Binding LoadDataCmd}">...</Button>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock >python file路径</TextBlock>
+                    <TextBox Text="{Binding PythonFilePath}"/>
+                    <Button Command="{Binding SetPythonFilePathCmd}">...</Button>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock >python exe路径</TextBlock>
+                    <TextBox Text="{Binding PythonExePath}"/>
+                    <Button Command="{Binding SetPythonExePathCmd}">...</Button>
+                </StackPanel>
+                <TextBlock Text="{Binding Info}"></TextBlock>
+            </StackPanel>
+        </GroupBox>
     </Grid>
 </Window>
