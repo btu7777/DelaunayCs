@@ -1,0 +1,59 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <SolidColorBrush x:Key="Blue" Color="#0078d4" />
+    <SolidColorBrush x:Key="Warning" Color="#ffba17" />
+    <SolidColorBrush x:Key="Danger" Color="#e31112" />
+    <SolidColorBrush x:Key="Pink" Color="#f78aab" />
+    <SolidColorBrush x:Key="Safe" Color="#89c05d" />
+    <!--#region Color-->
+    <SolidColorBrush x:Key="TextColor" Color="Black" />
+
+    <SolidColorBrush x:Key="BrushColor" Color="#0078d4" />
+    <SolidColorBrush x:Key="ControlColor" Color="#FF3843C4" />
+    <SolidColorBrush x:Key="WindowColor" Color="White" />
+    <!--  Control colors.  -->
+    <!--
+    <SolidColorBrush x:Key="WindowColor" Color="#FFE8EDF9" />
+    -->
+    <!--  Border colors  -->
+    <!--
+    <SolidColorBrush x:Key="BorderDarkColor" Color="#FF444444" />
+
+    <SolidColorBrush x:Key="PressedBorderLightColor" Color="#FF888888" />
+    <SolidColorBrush x:Key="PressedBorderDarkColor" Color="#FF444444" />
+
+    <SolidColorBrush x:Key="DisabledBorderLightColor" Color="#FFAAAAAA" />
+    <SolidColorBrush x:Key="DisabledBorderDarkColor" Color="#FF888888" />
+
+    <SolidColorBrush x:Key="DefaultBorderBrushDarkColor" Color="Black" />
+
+    -->
+    <!--  Control-specific resources.  -->
+    <!--
+    <SolidColorBrush x:Key="HeaderTopColor" Color="#FFC5CBF9" />
+    <SolidColorBrush x:Key="DatagridCurrentCellBorderColor" Color="Black" />
+    <SolidColorBrush x:Key="SliderTrackDarkColor" Color="#FFC5CBF9" />
+
+    <SolidColorBrush x:Key="NavButtonFrameColor" Color="#FF3843C4" />
+    -->
+    <!--#endregion-->
+    <!--
+    <SolidColorBrush x:Key="PossibleErrorBrush" Color="White" />
+
+    <SolidColorBrush x:Key="ContentAreaColorLight" Color="#FFC5CBF9" />
+    <SolidColorBrush x:Key="ContentAreaColorDark" Color="#FF7381F9" />
+
+
+    <SolidColorBrush x:Key="DisabledControlLightColor" Color="#FFE8EDF9" />
+    <SolidColorBrush x:Key="DisabledControlDarkColor" Color="#FFC5CBF9" />
+    <SolidColorBrush x:Key="DisabledForegroundColor" Color="#FF888888" />
+
+    <SolidColorBrush x:Key="SelectedBackgroundColor" Color="#FFC5CBF9" />
+    <SolidColorBrush x:Key="SelectedUnfocusedColor" Color="#eeeff0" />
+
+    <SolidColorBrush x:Key="ControlLightColor" Color="Transparent" />
+    <SolidColorBrush x:Key="ControlMediumColor" Color="#FF7381F9" />
+    <SolidColorBrush x:Key="ControlDarkColor" Color="#FF211AA9" />
+
+    <SolidColorBrush x:Key="ControlMouseOverColor" Color="#FF3843C4" />
+    <SolidColorBrush x:Key="ControlPressedColor" Color="#FF211AA9" />-->
+</ResourceDictionary>

@@ -1,0 +1,44 @@
+﻿<Window x:Class="Contour.TestUI.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:local="clr-namespace:Contour.TestUI"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:viewmodel="clr-namespace:Contour.TestUI.ViewModels"
+        Title="MainWindow"
+        Width="800"
+        Height="450"
+        mc:Ignorable="d">
+    <Window.DataContext>
+        <viewmodel:MainWindowViewModel />
+    </Window.DataContext>
+    <Window.Resources />
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="150" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Column="0">
+                <Button>导入数据文件</Button>
+                <Button>导入数据文件</Button>
+                <Button>生成三角面</Button>
+                <Button>生成</Button>
+            </StackPanel>
+            <GroupBox Grid.Row="1" Header="信息展示">
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock>python路径</TextBlock>
+                        <TextBox />
+                    </StackPanel>
+
+                </StackPanel>
+            </GroupBox>
+        </Grid>
+
+    </Grid>
+</Window>

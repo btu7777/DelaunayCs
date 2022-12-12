@@ -1,0 +1,29 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<OutputType>WinExe</OutputType>
+		<TargetFramework>net472</TargetFramework>
+		<!--<Nullable>enable</Nullable>-->
+		<UseWPF>true</UseWPF>
+		<PlatformTarget>x64</PlatformTarget>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<Folder Include="Controls\Converts\" />
+		<Folder Include="Models\" />
+		<Folder Include="Images\" />
+		<Folder Include="Views\" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <PackageReference Include="Prism.Core" Version="8.1.97" />
+	  <PackageReference Include="PropertyChanged.Fody" Version="4.1.0" />
+	</ItemGroup>
+	<ItemGroup>
+		<Page Update="Styles\Colors.xaml">
+			<Generator>MSBuild:Compile</Generator>
+			<SubType>Designer</SubType>
+			<ContainsDesignTimeResources>true</ContainsDesignTimeResources>
+		</Page>
+	</ItemGroup>
+</Project>
