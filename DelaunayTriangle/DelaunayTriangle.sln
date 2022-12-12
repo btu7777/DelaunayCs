@@ -13,6 +13,10 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "numpy", "numpy\numpy.vcxpro
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Contour.TestUI", "Contour.TestUI\Contour.TestUI.csproj", "{DF5ABABA-1820-4B04-9F56-08875BC98692}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "C++files", "C++files", "{18D3927F-7DC0-40AF-A293-2FB3307784B5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TestUI", "TestUI", "{24E678A8-64AD-42E2-A6E8-EC9C6F9571F4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -86,6 +90,12 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{C2D7DA03-FAE6-4554-863C-26F18CC17B68} = {24E678A8-64AD-42E2-A6E8-EC9C6F9571F4}
+		{479E157A-23B1-460F-8B28-56B30598A040} = {18D3927F-7DC0-40AF-A293-2FB3307784B5}
+		{564BB381-716B-4EDE-BA8E-13549C1AC16D} = {18D3927F-7DC0-40AF-A293-2FB3307784B5}
+		{DF5ABABA-1820-4B04-9F56-08875BC98692} = {24E678A8-64AD-42E2-A6E8-EC9C6F9571F4}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {09313CD7-4B1F-4079-8349-478682FF54F1}

@@ -4,6 +4,7 @@ using PropertyChanged;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -28,6 +29,7 @@ namespace Contour.TestUI.ViewModels
 
         private void Init()
         {
+
         }
 
         string pythonDir = Environment.GetEnvironmentVariable("PYTHONPATH");
@@ -41,11 +43,24 @@ namespace Contour.TestUI.ViewModels
                 }
                 else return;
             }
-            if (FilePath != null)
-                ProcessStartInfo startInfo = new ProcessStartInfo();
+            if (string.IsNullOrEmpty(FilePath) || File.Exists(FilePath))
+                return;
+            ProcessStartInfo startInfo = new ProcessStartInfo();
             startInfo.FileName = pythonExe;
             startInfo.Arguments = pythonFile;
+            // Start the Python process
+            using (Process process = Process.Start(startInfo))
+            {
+                // Wait for the process to exit
+                process.WaitForExit();
 
+                // Check the exit code of the process
+                if (process.ExitCode != 0)
+                {
+                    // The Python process exited with an error
+                    Console.WriteLine("An error occurred while running the Python file.");
+                }
+            }
         }
     }
 }

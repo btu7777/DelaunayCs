@@ -35,7 +35,7 @@
                         <TextBlock>python路径</TextBlock>
                         <TextBox />
                     </StackPanel>
-
+                    <TextBlock Text="{Binding Info}"></TextBlock>
                 </StackPanel>
             </GroupBox>
         </Grid>
