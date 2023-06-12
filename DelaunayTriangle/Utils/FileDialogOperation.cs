@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace Utils
 {
-    public static class FileOperation
+    public static class FileDialogOperation
     {
         public static void MyOpenFileDialog(this Action<string> func, string title, params string[] filters)
         {

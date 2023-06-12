@@ -13,5 +13,6 @@ namespace DelaunayTriangle.TestUI
     /// </summary>
     public partial class App : Application
     {
+        
     }
 }

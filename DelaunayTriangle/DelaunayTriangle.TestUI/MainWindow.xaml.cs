@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DelaunayTriangle.TestUI.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,19 @@ namespace DelaunayTriangle.TestUI
     /// </summary>
     public partial class MainWindow : Window
     {
+        MainWindowViewModel vm;
         public MainWindow()
         {
+            System.Windows.FrameworkCompatibilityPreferences.KeepTextBoxDisplaySynchronizedWithTextProperty = false;
+
+            vm = new MainWindowViewModel();
             InitializeComponent();
+            this.DataContext = vm;
+        }
+
+        private void Window_Closed(object sender, EventArgs e)
+        {
+            vm.SaveConfigCmd.Execute();
         }
     }
 }

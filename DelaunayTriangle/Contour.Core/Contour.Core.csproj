@@ -5,8 +5,11 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <ProjectReference Include="..\Utils\Utils.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
 	  <Reference Include="PresentationCore" />
-	  <Reference Include="PresentationFramework" />
 	  <Reference Include="Triangle">
 	    <HintPath>..\..\dll\Triangle.dll</HintPath>
 	  </Reference>

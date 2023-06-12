@@ -61,7 +61,7 @@
 
 
 
-    <Style BasedOn="{StaticResource {x:Type CheckBox}}" TargetType="CheckBox">
+    <!--<Style BasedOn="{StaticResource {x:Type CheckBox}}" TargetType="CheckBox">
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="Template">
             <Setter.Value>
@@ -87,7 +87,8 @@
                                       Stroke="White"
                                       StrokeThickness="2"
                                       Visibility="Collapsed" />
-                                <!--<Rectangle x:Name="CheckMark"
+    -->
+    <!--<Rectangle x:Name="CheckMark"
                                            Width="20"
                                            Height="20"
                                            VerticalAlignment="Center"
@@ -95,6 +96,7 @@
                                            Stroke="White"
                                            StrokeThickness="2"
                                            Visibility="Collapsed" />-->
+    <!--
                             </Grid>
                         </BulletDecorator.Bullet>
                         <ContentPresenter Margin="4,0,0,0"
@@ -130,5 +132,5 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-    </Style>
+    </Style>-->
 </ResourceDictionary>

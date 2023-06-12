@@ -10,14 +10,29 @@
 
 	<ItemGroup>
 		<Folder Include="Controls\Converts\" />
-		<Folder Include="Models\" />
 		<Folder Include="Images\" />
-		<Folder Include="Views\" />
+		<Folder Include="Services\" />
 	</ItemGroup>
 
 	<ItemGroup>
+	  <PackageReference Include="MathNet.Spatial" Version="0.6.0" />
+	  <PackageReference Include="NetTopologySuite.Core" Version="1.15.3" />
+	  <PackageReference Include="Newtonsoft.Json.Bson" Version="1.0.2" />
 	  <PackageReference Include="Prism.Core" Version="8.1.97" />
 	  <PackageReference Include="PropertyChanged.Fody" Version="4.1.0" />
+	  <PackageReference Include="SharpGltfTileExt" Version="0.0.9" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\Contour.Core\Contour.Core.csproj" />
+	  <ProjectReference Include="..\Utils\Utils.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Reference Include="System.Windows.Forms" />
+	  <Reference Include="Triangle">
+	    <HintPath>..\..\dll\Triangle.dll</HintPath>
+	  </Reference>
 	</ItemGroup>
 	<ItemGroup>
 		<Page Update="Styles\Colors.xaml">

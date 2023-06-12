@@ -21,6 +21,7 @@ namespace Contour.TestUI.ViewModels
         public string PythonExePath { get; set; }
         public string PythonFilePath { get; set; }
         public double Heigtht { get; set; } = 50;
+        public DelegateCommand GenTris2Cmd { get; set; }
         public DelegateCommand GenTrisCmd { get; set; }
         public DelegateCommand GenContourCmd { get; set; }
         public DelegateCommand InitCmd { get; set; }
@@ -32,22 +33,18 @@ namespace Contour.TestUI.ViewModels
         {
             GenContourCmd = new DelegateCommand(GenContour);
             GenTrisCmd = new DelegateCommand(GenTris);
+            GenTris2Cmd = new DelegateCommand(GenTris2);
             InitCmd = new DelegateCommand(Init);
             ClearCmd = new DelegateCommand(Clear);
             LoadDataCmd = new DelegateCommand(LoadData);
-            SetPythonExePathCmd = new DelegateCommand(SetPythonExePath);
-            SetPythonFilePathCmd = new DelegateCommand(SetPythonFilePath);
+            SetPythonExePathCmd = new DelegateCommand(() => new Action<string>((m) => PythonExePath = m).MyOpenFileDialog("选择python.exe路径", "exe"));
+            SetPythonFilePathCmd = new DelegateCommand(() => new Action<string>((m) => PythonFilePath = m).MyOpenFileDialog("选择py文件", "py"));
 
         }
 
-        private void SetPythonFilePath()
+        private void GenTris2()
         {
-            new Action<string>((m) => PythonFilePath = m).MyOpenFileDialog("选择py文件", "py");
-        }
 
-        private void SetPythonExePath()
-        {
-            new Action<string>((m) => PythonExePath = m).MyOpenFileDialog("选择python.exe路径", "exe");
         }
 
         private void LoadData()
@@ -69,8 +66,9 @@ namespace Contour.TestUI.ViewModels
 
         private void Init()
         {
-            PythonFilePath = @"D:\document\GitHub\1-python\1-practice\setup.py";
-            FilePath = @"D:\document\GitHub\1-python\1-practice\cav.csv";
+            PythonFilePath = "F:\\Document\\GitHub\\1-Python\\practice-2\\setup.py";
+            //PythonFilePath = @"D:\document\GitHub\1-python\1-practice\setup.py";
+            FilePath = @".\点数据2000.txt";
             AutoSetPythonExe();
         }
         bool AutoSetPythonExe()
@@ -114,7 +112,7 @@ namespace Contour.TestUI.ViewModels
                 if (process.ExitCode != 0)
                 {
                     // The Python process exited with an error
-
+                    Info = "生成失败!";
                 }
                 else
                 {
@@ -126,7 +124,7 @@ namespace Contour.TestUI.ViewModels
         }
         void ReadCsvData(string content)
         {
-            
+
         }
     }
 }

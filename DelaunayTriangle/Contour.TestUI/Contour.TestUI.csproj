@@ -9,6 +9,10 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <None Remove="点数据2000.txt" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<Folder Include="Controls\Converts\" />
 		<Folder Include="Images\" />
 		<Folder Include="Models\" />
@@ -22,6 +26,12 @@
 
 	<ItemGroup>
 	  <ProjectReference Include="..\Utils\Utils.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Resource Include="点数据2000.txt">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Resource>
 	</ItemGroup>
 	<ItemGroup>
 		<Page Update="Styles\Colors.xaml">

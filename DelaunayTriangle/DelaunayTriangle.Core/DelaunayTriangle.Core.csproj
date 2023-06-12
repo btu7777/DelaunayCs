@@ -5,7 +5,13 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <PackageReference Include="System.Spatial" Version="5.8.5" />
+	  <Folder Include="Common\" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Reference Include="Triangle">
+	    <HintPath>..\..\dll\Triangle.dll</HintPath>
+	  </Reference>
 	</ItemGroup>
 
 </Project>

@@ -4,16 +4,173 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:local="clr-namespace:DelaunayTriangle.TestUI"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:viewmodel="clr-namespace:DelaunayTriangle.TestUI.ViewModels"
         Title="MainWindow"
         Width="800"
         Height="450"
+        d:DataContext="{x:Type viewmodel:MainWindowViewModel]}"
+        Closed="Window_Closed"
+        WindowState="Maximized"
         mc:Ignorable="d">
-    <Window.Resources />
+    <Window.Resources>
+        <Style TargetType="TextBox">
+            <Setter Property="Margin" Value="5,0" />
+            <Setter Property="MinWidth" Value="50" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+        </Style>
+        <Style TargetType="Button">
+            <Setter Property="Margin" Value="2" />
+        </Style>
+    </Window.Resources>
+    <!--<Window.DataContext>
+        <viewmodel:MainWindowViewModel />
+    </Window.DataContext>-->
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="150" />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="50" />
+        </Grid.RowDefinitions>
         <StackPanel>
-            <WrapPanel>
-                <Button>Test</Button>
-            </WrapPanel>
+            <GroupBox Header="显示设置">
+                <StackPanel>
+                    <ListBox ItemsSource="{Binding Settings}">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Grid Width="120">
+                                    <CheckBox HorizontalAlignment="Left"
+                                              VerticalAlignment="Center"
+                                              IsChecked="{Binding Value.IsChecked}">
+                                        <Viewbox MaxWidth="75" MaxHeight="20">
+                                            <TextBlock VerticalAlignment="Center" Text="{Binding Key}" />
+                                        </Viewbox>
+                                    </CheckBox>
+
+                                    <Button Width="20"
+                                            Height="20"
+                                            HorizontalAlignment="Right"
+                                            Command="{Binding Path=DataContext.(viewmodel:MainWindowViewModel.OpenColorDialogCmd), RelativeSource={RelativeSource AncestorType=local:MainWindow, Mode=FindAncestor}}"
+                                            CommandParameter="{Binding Value}">
+                                        <Button.Background>
+                                            <SolidColorBrush Color="{Binding Value.Color}" />
+                                        </Button.Background>
+                                    </Button>
+                                </Grid>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock>精度</TextBlock>
+                        <TextBox Text="{Binding Presion}" />
+                    </StackPanel>
+
+                </StackPanel>
+            </GroupBox>
+            <StackPanel Orientation="Horizontal">
+                <Button Command="{Binding ImportCsvCmd}">导入CSV数据</Button>
+                <Button Command="{Binding LoadDataCmd}">导入数据</Button>
+                <Button Command="{Binding OpenDataViewCmd}">查看数据</Button>
+            </StackPanel>
+
+            <Button Command="{Binding GenTrianglesCmd}">生成三角网</Button>
+            <Button Command="{Binding GenContourLinesCmd}">生成等高线</Button>
+            <Button Command="{Binding ClearCmd}">清理</Button>
+            <GroupBox Header="点位信息">
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock>最大高程:</TextBlock>
+                        <TextBlock Text="{Binding MaxElevation}" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock>最小高程:</TextBlock>
+                        <TextBlock Text="{Binding MinElevation}" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock>点个数</TextBlock>
+                        <TextBlock Text="{Binding PointCount}" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock>三角面个数</TextBlock>
+                        <TextBlock Text="{Binding TriCount}" />
+                    </StackPanel>
+                </StackPanel>
+            </GroupBox>
+            <StackPanel Orientation="Horizontal">
+                <StackPanel.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="Width" Value="50" />
+                        <Setter Property="Height" Value="3" />
+                        <Style.Triggers>
+                            <Trigger Property="IsEnabled" Value="True">
+                                <Setter Property="Background" Value="Red" />
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Background" Value="Gray" />
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </StackPanel.Resources>
+                <Border IsEnabled="{Binding Status[0]}" />
+                <Border IsEnabled="{Binding Status[1]}" />
+                <Border IsEnabled="{Binding Status[2]}" />
+            </StackPanel>
+            <GroupBox Header="等高线设置">
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="主等高线" />
+                        <TextBox Text="{Binding MainElevation}" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="次等高线" />
+                        <TextBox Text="{Binding SubElevation}" />
+                    </StackPanel>
+                    <Button Command="{Binding GenElevationsCmd}">生成等值线</Button>
+                </StackPanel>
+            </GroupBox>
+            <StackPanel Orientation="Horizontal">
+                <Button Command="{Binding AddElevationCmd}" Content="新增" />
+                <TextBox MinWidth="50"
+                         Margin="5,0"
+                         Text="{Binding Elevation, UpdateSourceTrigger=PropertyChanged}" />
+
+            </StackPanel>
+
+            <ListBox Height="Auto"
+                     ItemsSource="{Binding Elevations}"
+                     ScrollViewer.VerticalScrollBarVisibility="Auto">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Width="120">
+                            <TextBlock HorizontalAlignment="Left"
+                                       VerticalAlignment="Center"
+                                       Text="{Binding Height}" />
+                            <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+
+                                <Button Width="20"
+                                        Height="20"
+                                        Command="{Binding Path=DataContext.(viewmodel:MainWindowViewModel.OpenColorDialogCmd), RelativeSource={RelativeSource AncestorType=local:MainWindow, Mode=FindAncestor}}"
+                                        CommandParameter="{Binding}">
+                                    <Button.Background>
+                                        <SolidColorBrush Color="{Binding Color}" />
+                                    </Button.Background>
+                                </Button>
+                                <Button Width="20"
+                                        Height="20"
+                                        Command="{Binding Path=DataContext.(viewmodel:MainWindowViewModel.RemoveElevationCmd), RelativeSource={RelativeSource AncestorType=local:MainWindow, Mode=FindAncestor}}"
+                                        CommandParameter="{Binding}"
+                                        Content="X" />
+                            </StackPanel>
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
         </StackPanel>
+        <ContentPresenter Grid.Column="1"
+                          Margin="20"
+                          Content="{Binding Canvas}" />
     </Grid>
 </Window>
